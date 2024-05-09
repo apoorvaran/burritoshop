@@ -1,4 +1,4 @@
-interface OrderItemRequest {
+export interface OrderItemRequest {
     burritoId: number;
     quantity: number;
   }

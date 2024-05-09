@@ -1,4 +1,3 @@
-// src/ormconfig.ts
 module.exports = {
   type: 'mysql',
   host: 'localhost',

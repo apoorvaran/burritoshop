@@ -1,11 +1,11 @@
 {
-  "name": "newburritoshop",
+  "name": "burritoshop",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec ts-node index.ts",
+    "start": "nodemon --exec ts-node ./src/index.ts",
     "build": "tsc"
   },
   "author": "apoorva",
@@ -24,6 +24,5 @@
     "ts-node": "^10.9.2",
     "typeorm": "^0.3.20",
     "typescript": "^5.4.5"
-  },
-  "type": "module"
+  }
 }

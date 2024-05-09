@@ -1,4 +1,3 @@
-// src/services/UserService.ts
 import { EntityManager, In } from 'typeorm';
 import { Order } from '../entities/Order';
 import { OrderItem } from '../entities/OrderItem';
@@ -21,6 +20,12 @@ async createOrder(orderItems: number[], totalPrice: number): Promise<Order> {
    
     order.orderItems = await this.entityManager.find(OrderItem, { where: {id: In(orderItems)}} );
     return await this.entityManager.save(Order, order);
+  }
+  async getOrderItembyOrderId(orderId: number): Promise<OrderItem[]> {
+    const order = await this.entityManager.findOneByOrFail(Order, { id: orderId });
+    console.log(order);
+    console.log(order.orderItems);
+    return order.orderItems;
   }
 }
 

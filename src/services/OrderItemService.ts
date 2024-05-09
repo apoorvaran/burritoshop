@@ -1,6 +1,7 @@
 import { EntityManager } from 'typeorm';
 import { OrderItem } from '../entities/OrderItem';
 import { Burrito } from '../entities/Burrito';
+import { Order } from '../entities/Order';
 
 export class OrderItemService {
   private entityManager: EntityManager;
@@ -12,11 +13,11 @@ export class OrderItemService {
   async getOrderItembyOrderId(orderId: number): Promise<OrderItem[]> {
     return await this.entityManager.find(OrderItem, {
         where: { order: { id: orderId } },
-        relations: ['Order']
+        relations: ['order']
       });
   }
 
-  async createOrderItem(burritoId: number, quantity: number): Promise<OrderItem> {
+async createOrderItem(burritoId: number, quantity: number): Promise<OrderItem> {
     const orderItem = new OrderItem();
     orderItem.quantity = quantity;
     orderItem.burrito = await this.entityManager.findOneByOrFail(Burrito, { id: burritoId, });

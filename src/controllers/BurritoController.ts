@@ -1,4 +1,3 @@
-// src/controllers/ProfileController.ts
 import { Request, Response } from 'express';
 import { EntityManager } from 'typeorm';
 import { BurritoService } from '../services/BurritoService';
@@ -11,10 +10,13 @@ export class BurritoController {
     this.burritoService = new BurritoService(entityManager);
   }
 
-  async createBurrito(req: Request, res: Response) {
-    const { name, size, price } = req.body;
-    const newBurrito: Burrito = await this.burritoService.createBurrito(name, size, price);
-    res.json(newBurrito);
+  async createBurrito() {
+    const burritos: Burrito[] | null = await this.burritoService.getAllBurritos();
+    if (!burritos || burritos.length==0) {
+    const newBurrito: Burrito = await this.burritoService.createBurrito("Chicken Burrito", "Regular", 5);
+    await this.burritoService.createBurrito("Chicken Burrito", "XL", 10);
+    await this.burritoService.createBurrito("Veggie Burrito", "Regular", 20);
+    }
   }
 
   async getAllBurritos(req: Request, res: Response) {

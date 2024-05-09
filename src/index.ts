@@ -1,4 +1,3 @@
-// src/index.ts
 import 'reflect-metadata';
 import express from 'express';
 import { createConnection, EntityManager } from 'typeorm';
@@ -8,15 +7,22 @@ import { OrderController } from './controllers/OrderController';
 const app = express();
 const PORT = 3000;
 
-createConnection()
-  .then(connection => {
+createConnection({
+  type: 'sqlite',
+database: 'burritodb.sql',
+  entities: [
+    'src/entities/*.ts'
+  ],
+  synchronize: true,
+  logging: true
+}).then(connection => {
     console.log('Database connected');
     const entityManager: EntityManager = connection.manager;
 
     // Inject EntityManager into controllers
     const burritoController = new BurritoController(entityManager);
     const orderController = new OrderController(entityManager);
-
+    burritoController.createBurrito();
     // Define routes
     app.use(express.json());
     app.get('/burritos', burritoController.getAllBurritos.bind(burritoController));
