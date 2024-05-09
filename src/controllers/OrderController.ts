@@ -6,7 +6,6 @@ import { OrderItemService } from '../services/OrderItemService';
 import { BurritoService } from '../services/BurritoService';
 import { OrderItem } from '../entities/OrderItem';
 import { OrderItemRequest } from '../Interfaces';
-import { url } from 'inspector';
 
 export class OrderController {
   private orderService: OrderService;
@@ -25,7 +24,7 @@ export class OrderController {
   }
 
   async createOrder(req: Request, res: Response) {
-    /*
+    /* Request:
     [{burritoid1,10}, {burritoid2,5]},....
      */
     console.log(req.body);
@@ -54,12 +53,6 @@ export class OrderController {
   }
 
   async getOrderDetails(req: Request, res: Response) {
-    /*
-    const orderId = req.param("orderId");
-    console.log(orderId);
-    const orderItemList = await this.orderService.getOrderItembyOrderId(Number(orderId));
-    console.log(orderItemList);
-    res.json(orderItemList);*/
     const orderId = Number(req.params.orderId);
     const orderItemList = await this.orderItemService.getOrderItembyOrderId(
       orderId

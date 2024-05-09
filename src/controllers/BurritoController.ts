@@ -13,6 +13,7 @@ export class BurritoController {
   async createBurrito() {
     const burritos: Burrito[] | null = await this.burritoService.getAllBurritos();
     if (!burritos || burritos.length==0) {
+    // Creating Db statically here. In production env, there would be a migration or a different API.
     const newBurrito: Burrito = await this.burritoService.createBurrito("Chicken Burrito", "Regular", 5);
     await this.burritoService.createBurrito("Chicken Burrito", "XL", 10);
     await this.burritoService.createBurrito("Veggie Burrito", "Regular", 20);
